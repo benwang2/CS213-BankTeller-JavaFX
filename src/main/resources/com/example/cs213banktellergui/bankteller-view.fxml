@@ -139,6 +139,6 @@
       </StackPane>
    </center>
    <bottom>
-      <Label fx:id="textOutput" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <Label fx:id="textOutput" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER" style="-fx-background-color: #fff;" />
    </bottom>
 </BorderPane>
