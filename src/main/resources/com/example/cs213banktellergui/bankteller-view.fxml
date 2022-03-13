@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.Label?>
+<BorderPane id="bankTeller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.cs213banktellergui.HelloController">
+   <left>
+      <VBox id="paneControl" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="accountNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Account" />
+            <Button id="printNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Print" />
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="BankTeller" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox id="printPane" prefWidth="100.0" visible="false">
+               <children>
+                  <RadioButton maxHeight="37.0" maxWidth="1.7976931348623157E308" minHeight="36.0" mnemonicParsing="false" style="-fx-background-color: #eee;" text="Print by Account Type">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="printGroup" />
+                     </toggleGroup>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                  </RadioButton>
+                  <RadioButton maxHeight="37.0" maxWidth="1.7976931348623157E308" minHeight="36.0" mnemonicParsing="false" text="Print by Account Interest" toggleGroup="$printGroup">
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                  </RadioButton>
+                  <RadioButton maxHeight="37.0" maxWidth="1.7976931348623157E308" minHeight="36.0" mnemonicParsing="false" style="-fx-background-color: #eee;" text="Print All" toggleGroup="$printGroup">
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                  </RadioButton>
+                  <RadioButton maxHeight="37.0" maxWidth="1.7976931348623157E308" minHeight="36.0" mnemonicParsing="false" text="Update Balances" toggleGroup="$printGroup">
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                  </RadioButton>
+               </children>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </VBox>
+            <VBox id="accountPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="304.0" prefWidth="476.0">
+               <children>
+                  <FlowPane id="profilePane" hgap="64.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #eee;" vgap="24.0">
+                     <children>
+                        <TextField id="firstName" promptText="First Name" />
+                        <TextField id="lastName" promptText="Last Name" />
+                        <TextField id="dateOfBirth" promptText="Date of Birth" />
+                        <TextField id="amount" promptText="Amount" />
+                     </children>
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </FlowPane>
+                  <HBox id="accountTypePane" prefWidth="200.0" spacing="24.0">
+                     <children>
+                        <RadioButton id="checkingRadio" mnemonicParsing="false" text="Checking">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="accountType1" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton id="collegeCheckingRadio" mnemonicParsing="false" text="College Checking" toggleGroup="$accountType1" />
+                        <RadioButton id="savingsRadio" mnemonicParsing="false" text="Savings" toggleGroup="$accountType1" />
+                        <RadioButton id="moneyMarketRadio" mnemonicParsing="false" text="Money Market" toggleGroup="$accountType1" />
+                     </children>
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </HBox>
+                  <HBox id="accountActionPane" prefWidth="200.0" spacing="48.0" style="-fx-background-color: #eee;">
+                     <children>
+                        <RadioButton id="openRadio" mnemonicParsing="false" text="Open">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="accountAction" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton id="closeRadio" mnemonicParsing="false" text="Close" toggleGroup="$accountAction" />
+                        <RadioButton id="depositRadio" mnemonicParsing="false" text="Deposit" toggleGroup="$accountAction" />
+                        <RadioButton id="withdrawRadio" mnemonicParsing="false" text="Withdraw" toggleGroup="$accountAction" />
+                     </children>
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </HBox>
+                  <HBox id="loyaltyPane" prefWidth="200.0">
+                     <children>
+                        <CheckBox id="loyalCheckbox" mnemonicParsing="false" text="Loyal" />
+                     </children>
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </HBox>
+                  <HBox id="campusPane" prefWidth="200.0" spacing="36.0">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                     <children>
+                        <RadioButton id="newBrunswickRadio" mnemonicParsing="false" text="New Brunswick">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="location" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton id="newarkRadio" mnemonicParsing="false" text="Newark" toggleGroup="$location" />
+                        <RadioButton id="camdenRadio" mnemonicParsing="false" text="Camden" toggleGroup="$location" />
+                     </children>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+         <Button id="submitButton" mnemonicParsing="false" text="Submit" StackPane.alignment="BOTTOM_CENTER" onAction="#onHelloButtonClick"/>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" />
+         </padding>
+      </StackPane>
+   </center>
+   <bottom>
+      <Label fx:id="textOutput" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
