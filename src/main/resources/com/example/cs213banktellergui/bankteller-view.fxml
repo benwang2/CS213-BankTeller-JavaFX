@@ -20,8 +20,8 @@
    <left>
       <VBox id="paneControl" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="accountNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Account" />
-            <Button id="printNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Print" />
+            <Button fx:id="accountNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Account" onAction="#displayAccountPane"/>
+            <Button fx:id="printNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Print" onAction="#displayPrintPane"/>
          </children>
       </VBox>
    </left>
@@ -31,7 +31,7 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox id="printPane" prefWidth="100.0" visible="false">
+            <VBox fx:id="printPane" prefWidth="100.0" visible="false">
                <children>
                   <RadioButton maxHeight="37.0" maxWidth="1.7976931348623157E308" minHeight="36.0" mnemonicParsing="false" style="-fx-background-color: #eee;" text="Print by Account Type">
                      <toggleGroup>
@@ -61,14 +61,14 @@
                   <Insets bottom="12.0" top="12.0" />
                </padding>
             </VBox>
-            <VBox id="accountPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="304.0" prefWidth="476.0">
+            <VBox fx:id="accountPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="304.0" prefWidth="476.0">
                <children>
                   <FlowPane id="profilePane" hgap="64.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #eee;" vgap="24.0">
                      <children>
-                        <TextField id="firstName" promptText="First Name" />
-                        <TextField id="lastName" promptText="Last Name" />
-                        <TextField id="dateOfBirth" promptText="Date of Birth" />
-                        <TextField id="amount" promptText="Amount" />
+                        <TextField fx:id="firstName" promptText="First Name" />
+                        <TextField fx:id="lastName" promptText="Last Name" />
+                        <TextField fx:id="dateOfBirth" promptText="Date of Birth" />
+                        <TextField fx:id="amount" promptText="Amount" />
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -78,12 +78,12 @@
                      <children>
                         <RadioButton id="checkingRadio" mnemonicParsing="false" text="Checking">
                            <toggleGroup>
-                              <ToggleGroup fx:id="accountType1" />
+                              <ToggleGroup fx:id="accountType"/>
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton id="collegeCheckingRadio" mnemonicParsing="false" text="College Checking" toggleGroup="$accountType1" />
-                        <RadioButton id="savingsRadio" mnemonicParsing="false" text="Savings" toggleGroup="$accountType1" />
-                        <RadioButton id="moneyMarketRadio" mnemonicParsing="false" text="Money Market" toggleGroup="$accountType1" />
+                        <RadioButton id="collegeCheckingRadio" mnemonicParsing="false" text="College Checking" toggleGroup="$accountType" />
+                        <RadioButton id="savingsRadio" mnemonicParsing="false" text="Savings" toggleGroup="$accountType" />
+                        <RadioButton id="moneyMarketRadio" mnemonicParsing="false" text="Money Market" toggleGroup="$accountType" />
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -119,11 +119,11 @@
                      <children>
                         <RadioButton id="newBrunswickRadio" mnemonicParsing="false" text="New Brunswick">
                            <toggleGroup>
-                              <ToggleGroup fx:id="location" />
+                              <ToggleGroup fx:id="campus" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton id="newarkRadio" mnemonicParsing="false" text="Newark" toggleGroup="$location" />
-                        <RadioButton id="camdenRadio" mnemonicParsing="false" text="Camden" toggleGroup="$location" />
+                        <RadioButton id="newarkRadio" mnemonicParsing="false" text="Newark" toggleGroup="$campus" />
+                        <RadioButton id="camdenRadio" mnemonicParsing="false" text="Camden" toggleGroup="$campus" />
                      </children>
                   </HBox>
                </children>
@@ -132,7 +132,7 @@
                </opaqueInsets>
             </VBox>
          </children>
-         <Button id="submitButton" mnemonicParsing="false" text="Submit" StackPane.alignment="BOTTOM_CENTER" onAction="#onHelloButtonClick"/>
+         <Button id="submitButton" mnemonicParsing="false" text="Submit" StackPane.alignment="BOTTOM_CENTER" onAction="#submit"/>
          <padding>
             <Insets bottom="12.0" left="12.0" right="12.0" />
          </padding>
