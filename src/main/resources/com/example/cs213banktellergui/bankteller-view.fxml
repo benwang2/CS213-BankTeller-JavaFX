@@ -76,7 +76,7 @@
                   </FlowPane>
                   <HBox id="accountTypePane" prefWidth="200.0" spacing="24.0">
                      <children>
-                        <RadioButton id="checkingRadio" mnemonicParsing="false" text="Checking">
+                        <RadioButton id="checkingRadio" mnemonicParsing="false" text="Checking" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="accountType"/>
                            </toggleGroup>
@@ -91,7 +91,7 @@
                   </HBox>
                   <HBox id="accountActionPane" prefWidth="200.0" spacing="48.0" style="-fx-background-color: #eee;">
                      <children>
-                        <RadioButton id="openRadio" mnemonicParsing="false" text="Open">
+                        <RadioButton id="openRadio" mnemonicParsing="false" text="Open" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="accountAction" />
                            </toggleGroup>
@@ -117,7 +117,7 @@
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
                      <children>
-                        <RadioButton id="newBrunswickRadio" mnemonicParsing="false" text="0">
+                        <RadioButton id="newBrunswickRadio" mnemonicParsing="false" text="0" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="campus" />
                            </toggleGroup>
