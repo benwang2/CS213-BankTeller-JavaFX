@@ -34,8 +34,8 @@
             <VBox fx:id="printPane" prefWidth="100.0" visible="false">
                <children>
                   <RadioButton maxHeight="37.0" maxWidth="1.7976931348623157E308" minHeight="36.0" mnemonicParsing="false" style="-fx-background-color: #eee;" text="Print by Account Type">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="printGroup" />
+                     <toggleGroup >
+                        <ToggleGroup fx:id="printGroup"/>
                      </toggleGroup>
                      <padding>
                         <Insets left="4.0" right="4.0" />
@@ -91,14 +91,14 @@
                   </HBox>
                   <HBox id="accountActionPane" prefWidth="200.0" spacing="48.0" style="-fx-background-color: #eee;">
                      <children>
-                        <RadioButton id="openRadio" mnemonicParsing="false" text="Open" selected="true">
+                        <RadioButton id="openRadio" mnemonicParsing="false" text="Open" selected="true" onAction="#onAccountActionChanged">
                            <toggleGroup>
                               <ToggleGroup fx:id="accountAction" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton id="closeRadio" mnemonicParsing="false" text="Close" toggleGroup="$accountAction" />
-                        <RadioButton id="depositRadio" mnemonicParsing="false" text="Deposit" toggleGroup="$accountAction" />
-                        <RadioButton id="withdrawRadio" mnemonicParsing="false" text="Withdraw" toggleGroup="$accountAction" />
+                        <RadioButton fx:id="closeRadio" mnemonicParsing="false" text="Close" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
+                        <RadioButton id="depositRadio" mnemonicParsing="false" text="Deposit" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
+                        <RadioButton id="withdrawRadio" mnemonicParsing="false" text="Withdraw" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -106,7 +106,7 @@
                   </HBox>
                   <HBox id="loyaltyPane" prefWidth="200.0">
                      <children>
-                        <CheckBox id="loyalCheckbox" mnemonicParsing="false" text="Loyal" />
+                        <CheckBox fx:id="loyalCheckbox" mnemonicParsing="false" text="Loyal" />
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />

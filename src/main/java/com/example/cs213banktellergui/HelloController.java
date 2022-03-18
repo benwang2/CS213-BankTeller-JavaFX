@@ -1,10 +1,7 @@
 package com.example.cs213banktellergui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import java.util.InputMismatchException;
@@ -14,19 +11,17 @@ public class HelloController {
     AccountDatabase  database = new AccountDatabase();
 
 
-    @FXML
-    private TextField firstName, lastName, dateOfBirth, amount;
+    @FXML private TextField firstName, lastName, dateOfBirth, amount;
 
-    @FXML
-    private ToggleGroup accountType, accountAction, campus;
-
+    @FXML private ToggleGroup accountType, accountAction, campus;
+    @FXML private RadioButton closeRadio;
 
 
-    @FXML
-    private VBox printPane, accountPane;
+    @FXML private VBox printPane, accountPane;
 
-    @FXML
-    private Label textOutput;
+    @FXML private Label textOutput;
+
+    @FXML private CheckBox loyalCheckbox;
 
 
     /**
@@ -38,15 +33,10 @@ public class HelloController {
         if(selectedAccountActionButton.getText().equals("Open")){
             textOutput.setText(checkValidAccount());
 
-        }
-        else if(selectedAccountActionButton.getText().equals("Close")){
+        }else if(selectedAccountActionButton.getText().equals("Close")){
 
         }
-
-
     }
-
-
 
     private String checkValidAccount() {
         Account account = null;
@@ -69,16 +59,14 @@ public class HelloController {
                 account = new MoneyMarket(profile, balance);
             } else if (selectedAccountType.getText().equals("College Checking")) {
                 if (campus.getSelectedToggle() == null) return "Invalid Campus Code.";
-                RadioButton selectedCampusButton = (RadioButton) accountAction.getSelectedToggle();
-                account = new CollegeChecking(profile, balance, Integer.parseInt(selectedCampusButton.getText()));
+                account = new CollegeChecking(profile, balance, Integer.parseInt(selectedAccountType.getText()));
             } else if (selectedAccountType.getText().equals("Savings")) {
-                RadioButton selectedButton = (RadioButton) accountAction.getSelectedToggle();
+                account = new Savings(profile, balance, loyalCheckbox.isSelected()?1:0);
             }
             account.deposit(balance);
             RadioButton selectedAccountActionButton = (RadioButton) accountAction.getSelectedToggle();
-            if(selectedAccountActionButton.getText().equals("Open")) return checkOpenAccount(account);
+            if (selectedAccountActionButton.getText().equals("Open")) return checkOpenAccount(account);
             else return "";
-
         }
     }
     /**
@@ -86,7 +74,6 @@ public class HelloController {
      * @param account An account object to open.
      * @return A string describing whether the account was already opened, or not enough money to open a MoneyMarket account
      */
-
     private String checkOpenAccount(Account account){
         boolean accountExists = database.doesAccountExist(account);
 
@@ -105,7 +92,6 @@ public class HelloController {
             return account.getHolder().toString()+" same account(type) is in the database.";
     }
 
-
     private void mutexVisibility(VBox show, VBox hide){
         show.setVisible(true);
         hide.setVisible(false);
@@ -119,5 +105,10 @@ public class HelloController {
     @FXML
     protected void displayPrintPane(){
         mutexVisibility(printPane, accountPane);
+    }
+
+    @FXML
+    protected void onAccountActionChanged(){
+        amount.setDisable(closeRadio.isSelected());
     }
 }
