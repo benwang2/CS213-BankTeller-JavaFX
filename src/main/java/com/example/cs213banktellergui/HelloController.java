@@ -2,6 +2,7 @@ package com.example.cs213banktellergui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.InputMismatchException;
@@ -12,13 +13,11 @@ public class HelloController {
 
 
     @FXML private TextField firstName, lastName, dateOfBirth, amount;
-
-    @FXML private ToggleGroup accountType, accountAction, campus;
+    @FXML private ToggleGroup accountType, accountAction, campus, printGroup;
     @FXML private RadioButton closeRadio;
-
-
+    @FXML private RadioButton savingsRadio, collegeCheckingRadio;
+    @FXML private HBox campusPane;
     @FXML private VBox printPane, accountPane;
-
     @FXML private Label textOutput;
 
     @FXML private CheckBox loyalCheckbox;
@@ -29,12 +28,22 @@ public class HelloController {
      */
     @FXML
     protected void submit(){
-        RadioButton selectedAccountActionButton = (RadioButton) accountAction.getSelectedToggle();
-        if(selectedAccountActionButton.getText().equals("Open")){
-            textOutput.setText(checkValidAccount());
-
-        }else if(selectedAccountActionButton.getText().equals("Close")){
-
+        if (accountPane.isVisible()){
+            RadioButton selectedAccountActionButton = (RadioButton) accountAction.getSelectedToggle();
+            switch(selectedAccountActionButton.getText()){
+                case "Open" -> textOutput.setText(checkValidAccount());
+                case "Close" -> textOutput.setText("Close action.");
+                case "Deposit" -> textOutput.setText("Deposit action.");
+                case "Withdraw" -> textOutput.setText("Withdraw action.");
+            }
+        } else if (printPane.isVisible()){
+            RadioButton selectedPrintActionButton = (RadioButton) printGroup.getSelectedToggle();
+            switch (selectedPrintActionButton.getId()){
+                case "printByType" -> System.out.println("printByType");
+                case "printByInterest" -> System.out.println("printByInterest");
+                case "printAll" -> System.out.println("printAll");
+                case "updateBalances" -> System.out.println("updateBalances");
+            }
         }
     }
 
@@ -110,5 +119,11 @@ public class HelloController {
     @FXML
     protected void onAccountActionChanged(){
         amount.setDisable(closeRadio.isSelected());
+    }
+
+    @FXML
+    protected void onAccountTypeChanged(){
+        loyalCheckbox.setDisable(!savingsRadio.isSelected());
+        campusPane.setDisable(!collegeCheckingRadio.isSelected());
     }
 }
