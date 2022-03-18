@@ -16,10 +16,9 @@ public class HelloController {
     @FXML private ToggleGroup accountType, accountAction, campus, printGroup;
     @FXML private RadioButton closeRadio;
     @FXML private RadioButton savingsRadio, collegeCheckingRadio;
-    @FXML private HBox campusPane;
+    @FXML private HBox campusPane, loyaltyPane;
     @FXML private VBox printPane, accountPane;
     @FXML private Label textOutput;
-
     @FXML private CheckBox loyalCheckbox;
 
 
@@ -123,7 +122,7 @@ public class HelloController {
 
     @FXML
     protected void onAccountTypeChanged(){
-        loyalCheckbox.setDisable(!savingsRadio.isSelected());
+        loyaltyPane.setDisable(!savingsRadio.isSelected());
         campusPane.setDisable(!collegeCheckingRadio.isSelected());
     }
 }

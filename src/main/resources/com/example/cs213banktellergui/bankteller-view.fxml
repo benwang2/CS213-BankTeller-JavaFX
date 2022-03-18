@@ -76,14 +76,14 @@
                   </FlowPane>
                   <HBox id="accountTypePane" prefWidth="200.0" spacing="24.0">
                      <children>
-                        <RadioButton fx:id="checkingRadio" mnemonicParsing="false" text="Checking" selected="true" onAction="#onAccountTypeChanged">
+                        <RadioButton id="checkingRadio" mnemonicParsing="false" text="Checking" selected="true" onAction="#onAccountTypeChanged">
                            <toggleGroup>
                               <ToggleGroup fx:id="accountType"/>
                            </toggleGroup>
                         </RadioButton>
                         <RadioButton fx:id="collegeCheckingRadio" mnemonicParsing="false" text="College Checking" toggleGroup="$accountType" onAction="#onAccountTypeChanged"/>
                         <RadioButton fx:id="savingsRadio" mnemonicParsing="false" text="Savings" toggleGroup="$accountType" onAction="#onAccountTypeChanged"/>
-                        <RadioButton fx:id="moneyMarketRadio" mnemonicParsing="false" text="Money Market" toggleGroup="$accountType" onAction="#onAccountTypeChanged"/>
+                        <RadioButton id="moneyMarketRadio" mnemonicParsing="false" text="Money Market" toggleGroup="$accountType" onAction="#onAccountTypeChanged"/>
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -104,7 +104,7 @@
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
                   </HBox>
-                  <HBox id="loyaltyPane" prefWidth="200.0" disable="true">
+                  <HBox fx:id="loyaltyPane" prefWidth="200.0" disable="true">
                      <children>
                         <CheckBox fx:id="loyalCheckbox" mnemonicParsing="false" text="Loyal" />
                      </children>
