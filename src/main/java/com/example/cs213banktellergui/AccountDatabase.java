@@ -186,25 +186,27 @@ public class AccountDatabase {
     /**
      * Prints the accounts in the database in the current order.
      */
-    public void print() {
+    public String print() {
+        String result = "";
         if (this.numAccts == 0){
-            System.out.println("Account database is empty.");
-            return;
+            return "Account database is empty.";
         }
 
-        System.out.println("\n*list of accounts in the database*");
+        result += ("*list of accounts in the database*\n");
         for (int i = 0; i < this.numAccts; i++)
-            System.out.println(this.accounts[i].toString());
-        System.out.println("*end of list*\n");
+            result += this.accounts[i].toString() + "\n";
+        result += ("*end of list*\n");
+
+        return result;
     }
 
     /**
      * Sorts the account database by type in place, then prints it.
      */
-    public void printByAccountType() {
+    public String printByAccountType() {
+        String result = "";
         if (this.numAccts == 0){
-            System.out.println("Account database is empty.");
-            return;
+            return ("Account database is empty.");
         }
 
         for(int i = 0; i < this.numAccts - 1; i++) {
@@ -212,49 +214,79 @@ public class AccountDatabase {
             for (int j = i + 1; j < this.numAccts; j++) {
                 Account acct1 = this.accounts[minIdx];
                 Account acct2 = this.accounts[j];
-
-                if (acct2.getType().compareTo(acct1.getType()) < 0) {
+                if (compareAccounts(acct2.getType(), acct1.getType()) == -1) {
                     minIdx = j;
-                } else if (acct2 instanceof CollegeChecking && acct1 instanceof CollegeChecking) {
-                    CollegeChecking cc2 = (CollegeChecking) acct2;
-                    CollegeChecking cc1 = (CollegeChecking) acct1;
-
-                    if (cc2.getCampus() < cc1.getCampus()) {
-                        minIdx = j;
+                } else if (compareAccounts(acct2.getType(), acct1.getType()) == 0) {
+                    if(acct1 instanceof CollegeChecking) {
+                        CollegeChecking cc2 = (CollegeChecking) acct2;
+                        CollegeChecking cc1 = (CollegeChecking) acct1;
+                        if (cc2.getCampus() < cc1.getCampus()) {
+                            minIdx = j;
+                        } else if(cc2.getCampus() == cc1.getCampus() && (cc2.getBalance() < cc1.getBalance())){
+                            minIdx = j;
+                        }
+                    }
+                    else{
+                        if(acct2.getBalance() < acct1.getBalance()){
+                            minIdx = j;
+                        }
                     }
                 }
-
             }
+
             Account toSwap = this.accounts[i];
             this.accounts[i] = this.accounts[minIdx];
             this.accounts[minIdx] = toSwap;
         }
 
-        System.out.println("\n*list of accounts by account type*");
+        result += ("*list of accounts by account type*\n");
         for (int i = 0; i < this.numAccts; i++)
-            System.out.println(this.accounts[i].toString());
-        System.out.println("*end of list*\n");
+            result += (this.accounts[i].toString()) + "\n";
+        result += ("*end of list*\n");
+
+        return result;
     }
 
     /**
      * Sorts the account database by fee and interest in place, then prints it.
      */
-    public void printFeeAndInterest() {
+    public String printFeeAndInterest() {
+        String result = "";
+
         if (this.numAccts == 0){
-            System.out.println("Account database is empty.");
-            return;
+            return ("Account database is empty.");
         }
 
-        System.out.println("\n*list of accounts with fee and monthly interest");
+        result += ("*list of accounts with fee and monthly interest\n");
         for(int i =0; i < this.numAccts; i++){
-            String s = "";
-            s += accounts[i].toString() +
+            result += accounts[i].toString() +
                     "::fee $" + String.format("%,.2f",accounts[i].fee()) +
-                    "::monthly interest $" + String.format("%,.2f",accounts[i].monthlyInterest()
-            );
-            System.out.println(s);
+                    "::monthly interest $" + String.format("%,.2f",accounts[i].monthlyInterest()) + "\n";
+            ;
         }
-       System.out.println("*end of list.\n");
+       result += ("*end of list.\n");
+        return result;
 
+    }
+
+    private int getOrderValue(String acct){
+        int result = 0;
+        switch(acct){
+            case "Checking" -> result = 0;
+            case "College Checking" -> result = 1;
+            case "Money Market Savings" -> result = 2;
+            case "Savings" -> result = 3;
+        }
+        return result;
+    }
+
+    private int compareAccounts(String acct2, String acct1){
+        if(getOrderValue(acct2) < getOrderValue(acct1)){
+            return -1;
+        }
+        else if(getOrderValue(acct2) > getOrderValue(acct1)){
+            return 1;
+        }
+        return 0;
     }
 }

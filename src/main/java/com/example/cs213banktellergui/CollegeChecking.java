@@ -1,5 +1,8 @@
 package com.example.cs213banktellergui;
 
+import static com.example.cs213banktellergui.AccountType.C;
+import static com.example.cs213banktellergui.AccountType.CC;
+
 /**
  * A checking account provided to college students on a verified campus.
  * College checking accounts have no monthly fees and a higher interest rate than regular checking account.
@@ -18,6 +21,11 @@ public class CollegeChecking extends Checking {
      * The name of the account type.
      */
     private static final String ACCOUNT_TYPE = "College Checking";
+
+    /**
+     * The account type Enum.
+     */
+
 
     /**
      * The campus code of the account.

@@ -1,4 +1,8 @@
 package com.example.cs213banktellergui;
+
+import static com.example.cs213banktellergui.AccountType.MM;
+import static com.example.cs213banktellergui.AccountType.S;
+
 /**
  * A standard savings account.
  * @author Benjamin Wang, Akash Shah
@@ -26,6 +30,8 @@ public class Savings extends Account {
      * The name of the account type.
      */
     public static final String ACCOUNT_TYPE = "Savings";
+
+
     protected int isLoyal;
 
     /**

@@ -18,6 +18,7 @@ public abstract class Account {
     protected boolean closed;
     protected double balance;
 
+
     /**
      * Constructs an account object with a profile.
      * @param holder Profile to construct the account with.

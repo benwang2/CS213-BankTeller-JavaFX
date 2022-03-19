@@ -1,4 +1,7 @@
 package com.example.cs213banktellergui;
+
+import static com.example.cs213banktellergui.AccountType.MM;
+
 /**
  * A Money Market savings account that offers higher interest rates, higher minimum balance, and maximum withdrawals.
  * Accounts with a balance over a certain amount are loyal
@@ -27,6 +30,8 @@ public class MoneyMarket extends Savings {
     private static final int MAX_WITHDRAWALS = 3;
 
     private int withdrawals = 0;
+
+
 
     /**
      * Constructs a money market with an initial amount.

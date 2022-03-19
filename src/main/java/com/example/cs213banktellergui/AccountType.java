@@ -14,11 +14,11 @@ public enum AccountType {
      */
     CC,
     /**
+     * Money Market account.
+     */
+    MM,
+    /**
      * Savings account
      */
     S,
-    /**
-     * Money Market account.
-     */
-    MM
 }

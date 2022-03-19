@@ -1,5 +1,7 @@
 package com.example.cs213banktellergui;
 
+import static com.example.cs213banktellergui.AccountType.C;
+
 /**
  * A standard checking account.
  * @author Benjamin Wang, Akash Shah
@@ -17,6 +19,9 @@ public class Checking extends Account {
      * The annual interest rate of the account.
      */
     private static final double INTEREST_RATE = 0.001;
+
+
+
 
     /**
      * Constructs a checking account given an account holder.
