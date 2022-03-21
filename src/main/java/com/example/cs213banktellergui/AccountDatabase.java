@@ -65,6 +65,7 @@ public class AccountDatabase {
      * @return A list of the updated accounts formatted as a String.
      */
     public String updateBalances(){
+        if (this.numAccts == 0) return "Account database is empty.";
         String printString = "\n*list of accounts with updated balance";
         for (int i = 0; i < this.numAccts; i++){
             if (!accounts[i].getClosed()) {
