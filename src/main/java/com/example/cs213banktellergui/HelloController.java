@@ -9,7 +9,6 @@ public class HelloController {
 
     AccountDatabase  database = new AccountDatabase();
 
-
     @FXML private TextField firstName, lastName, dateOfBirth, amount;
     @FXML private ToggleGroup accountType, accountAction, campus, printGroup;
     @FXML private RadioButton closeRadio;
@@ -30,58 +29,68 @@ public class HelloController {
             RadioButton selectedAccountActionButton = (RadioButton) accountAction.getSelectedToggle();
             if(result.equals("Missing data")){
                 if(selectedAccountActionButton.getText().equals("Close")){
-                    textOut.setText(result + " for closing an account.");
+                    printToOutput(result + " for closing an account.");
                 }
                 else if(selectedAccountActionButton.getText().equals("Open")){
-                    textOut.setText(result + " for opening an account.");
+                    printToOutput(result + " for opening an account.");
                 }
             } else if(result.equals("Ok")) {
                 Account account = generateAccount();
                 switch (selectedAccountActionButton.getText()) {
-                    case "Open" -> textOut.setText(checkOpenAccount(account));
-                    case "Close" -> textOut.setText(checkCloseAccount(account));
-                    case "Deposit" -> textOut.setText(checkDepositCommand(account));
-                    case "Withdraw" -> textOut.setText(checkWithdrawCommand(account));
+                    case "Open" -> printToOutput(checkOpenAccount(account));
+                    case "Close" -> printToOutput(checkCloseAccount(account));
+                    case "Deposit" -> printToOutput(checkDepositCommand(account));
+                    case "Withdraw" -> printToOutput(checkWithdrawCommand(account));
                 }
             }
             else{
-                textOut.setText(result);
+                printToOutput(result);
             }
         } else if (printPane.isVisible()){
             RadioButton selectedPrintActionButton = (RadioButton) printGroup.getSelectedToggle();
 
             switch (selectedPrintActionButton.getId()){
-                case "printByType" -> textOut.setText(database.printByAccountType());
-                case "printByInterest" -> textOut.setText(database.printFeeAndInterest());
-                case "printAll" -> textOut.setText(database.print());
-                case "updateBalances" -> textOut.setText(database.updateBalances());
+                case "printByType" -> printToOutput(database.printByAccountType());
+                case "printByInterest" -> printToOutput(database.printFeeAndInterest());
+                case "printAll" -> printToOutput(database.print());
+                case "updateBalances" -> printToOutput(database.updateBalances());
             }
-            System.out.println(database.print());
         }
+    }
+
+    private void printToOutput(String text){
+        textOut.appendText(text+"\n");
+    }
+
+    private int getSelectedCampus(){
+        int selectedCampus = -1;
+        RadioButton selectedCampusButton = (RadioButton) campus.getSelectedToggle();
+        switch (selectedCampusButton.getId()){
+            case "newBrunswickRadio" -> selectedCampus = 0;
+            case "newarkRadio" ->  selectedCampus = 1;
+            case "camdenRadio" -> selectedCampus = 2;
+        }
+        return selectedCampus;
     }
 
     private Account generateAccount(){
         Account account = null;
         RadioButton selectedAccountTypeButton = (RadioButton) accountType.getSelectedToggle();
-        Double balance = Double.parseDouble(amount.getText());
+        double balance = Double.parseDouble(amount.getText());
         Profile profile = new Profile(firstName.getText(), lastName.getText(), dateOfBirth.getText());
-
-
 
         switch(selectedAccountTypeButton.getText()){
 
             case "Checking" -> account = new Checking(profile, balance);
             case "Savings" -> account = new Savings(profile, balance, loyalCheckbox.isSelected() ? 1:0);
             case "Money Market" -> account = new MoneyMarket(profile, balance);
-            case "College Checking" -> account = new CollegeChecking(profile, balance, 0); //todo:
+            case "College Checking" -> account = new CollegeChecking(profile, balance, getSelectedCampus());
         }
-
 
         return account;
     }
 
     private String checkValidAccount() {
-
         if (firstName.getText().trim().isEmpty() || lastName.getText().trim().isEmpty()
                 || dateOfBirth.getText().trim().isEmpty()
                 || amount.getText().trim().isEmpty()) {
@@ -107,12 +116,12 @@ public class HelloController {
         boolean accountExists = database.doesAccountExist(account);
 
         if (!accountExists && account.getBalance() <= 0)
-            return("Initial deposit cannot be 0 or negative.");
+            return "Initial deposit cannot be 0 or negative.";
 
         if (account instanceof MoneyMarket) {
             MoneyMarket mm = (MoneyMarket) account;
             if (mm.getBalance() < mm.MIN_BALANCE)
-                return("Minimum of $2500 to open a MoneyMarket account.");
+                return "Minimum of $2500 to open a MoneyMarket account.";
         }
 
         if (database.open(account)) {
@@ -128,16 +137,16 @@ public class HelloController {
             database.close(account);
             return isClosed ? "Account is already closed." : "Account closed.";
         } else
-            return ("Can not close a non-existent account.");
+            return "Can not close a non-existent account.";
     }
 
     private String checkDepositCommand(Account account){
         boolean accountExists = database.doesAccountExist(account);
         if(!accountExists)
-            return (account.getHolder().toString() + " " +account.getType() + " is not in the database.");
+            return account.getHolder().toString() + " " +account.getType() + " is not in the database.";
         else
         if (account.getBalance() <= 0)
-            return ("Deposit - amount cannot be 0 or negative.");
+            return "Deposit - amount cannot be 0 or negative.";
         else {
             database.deposit(account);
             return "Deposit - balance updated.";
@@ -150,7 +159,7 @@ public class HelloController {
             return (account.getHolder().toString() + " " +account.getType() + " is not in the database.");
         else
         if (account.getBalance() <= 0)
-            return ("Withdraw - amount cannot be 0 or negative.");
+            return "Withdraw - amount cannot be 0 or negative.";
         else
             return database.withdraw(account) ? "Withdraw - balance updated." : "Withdraw - insufficient fund.";
     }

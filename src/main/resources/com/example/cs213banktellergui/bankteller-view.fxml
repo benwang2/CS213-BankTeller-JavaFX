@@ -14,14 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.Label?>
-<BorderPane id="bankTeller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane id="bankTeller" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.cs213banktellergui.HelloController">
    <left>
-      <VBox id="paneControl" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox id="paneControl" prefHeight="0.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="accountNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Account" onAction="#displayAccountPane"/>
-            <Button fx:id="printNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Print" onAction="#displayPrintPane"/>
+            <Button id="accountNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Account" onAction="#displayAccountPane"/>
+            <Button id="printNav" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" text="Print" onAction="#displayPrintPane"/>
          </children>
       </VBox>
    </left>
@@ -29,7 +28,7 @@
       <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="BankTeller" BorderPane.alignment="CENTER" />
    </top>
    <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <StackPane prefHeight="0.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
          <children>
             <VBox fx:id="printPane" prefWidth="100.0" visible="false">
                <children>
@@ -117,13 +116,13 @@
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
                      <children>
-                        <RadioButton id="newBrunswickRadio" mnemonicParsing="false" text="0" selected="true">
+                        <RadioButton id="newBrunswickRadio" mnemonicParsing="false" text="New Brunswick" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="campus" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton id="newarkRadio" mnemonicParsing="false" text="1" toggleGroup="$campus" />
-                        <RadioButton id="camdenRadio" mnemonicParsing="false" text="2" toggleGroup="$campus" />
+                        <RadioButton id="newarkRadio" mnemonicParsing="false" text="Newark" toggleGroup="$campus" />
+                        <RadioButton id="camdenRadio" mnemonicParsing="false" text="Camden" toggleGroup="$campus" />
                      </children>
                   </HBox>
                </children>
@@ -139,6 +138,6 @@
       </StackPane>
    </center>
    <bottom>
-      <TextArea fx:id="textOut" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER" style="-fx-background-color: #fff;"/>
+      <TextArea fx:id="textOut" prefHeight="120.0" prefWidth="600.0" BorderPane.alignment="CENTER" style="-fx-background-color: #fff;" editable="false"/>
    </bottom>
 </BorderPane>
