@@ -130,7 +130,6 @@ public class AccountDatabase {
         if (accountIndex != NOT_FOUND) {
             if (accounts[accountIndex].getClosed()) {
                 accounts[accountIndex].open(account);
-                accounts[accountIndex].deposit(account.getBalance());
             } else
                 return false;
         } else {
