@@ -64,18 +64,6 @@ public class CollegeChecking extends Checking {
     }
 
     /**
-     * Determines if two accounts are equal or not
-     * @param obj Object to compare with
-     * @return If two accounts are of the same type and have the same holder.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof CollegeChecking)) return false;
-        CollegeChecking account = (CollegeChecking) obj;
-        return this.holder.equals(account.holder);
-    }
-
-    /**
      * Gets the monthly fee
      * @return The monthly fee of the account.
      */

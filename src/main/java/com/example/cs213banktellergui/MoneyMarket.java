@@ -91,18 +91,6 @@ public class MoneyMarket extends Savings {
     }
 
     /**
-     * Determines if two accounts are equal or not
-     * @param obj Object to compare with
-     * @return If two accounts are of the same type and have the same holder.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof MoneyMarket)) return false;
-        MoneyMarket account = (MoneyMarket)obj;
-        return this.holder.equals(account.holder);
-    }
-
-    /**
      * Generates a printable string for an account.
      * @return A printable string formatted as "type::holder::Balance $XXX::LOYAL::WITHDRAWALS: X"
      */

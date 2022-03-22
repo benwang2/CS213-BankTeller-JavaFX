@@ -45,18 +45,6 @@ public class Savings extends Account {
         this.isLoyal = loyalty;
     }
 
-    /**
-     * Determines if two accounts are equal or not
-     * @param obj Object to compare with
-     * @return If two accounts are of the same type and have the same holder.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Savings)) return false;
-        Savings acc = (Savings) obj;
-        return this.holder.equals(acc.holder);
-    }
-
     @Override
     public String toString(){
         return super.toString() + (this.isLoyal==1 ? "::Loyal" : "");

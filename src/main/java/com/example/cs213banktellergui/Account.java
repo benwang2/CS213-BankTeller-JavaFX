@@ -36,9 +36,9 @@ public abstract class Account {
      */
     public boolean equals(Object obj) {
         if (!(obj instanceof Account)) return false;
-
         Account account = (Account) obj;
-        return getType().equals(account.getType()) && getHolder().equals(account.getHolder());
+
+        return this.getType().equals(account.getType()) && this.getHolder().equals(account.getHolder());
     }
 
     /**

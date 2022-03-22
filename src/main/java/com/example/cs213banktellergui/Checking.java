@@ -33,18 +33,6 @@ public class Checking extends Account {
     }
 
     /**
-     * Determines if two accounts are equal or not
-     * @param obj Object to compare with
-     * @return If two accounts are of the same type and have the same holder.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Checking)) return false;
-        Checking account = (Checking) obj;
-        return this.holder.equals(account.holder);
-    }
-
-    /**
      * Calculates the monthly interest of a checking account.
      * @return The computed monthly interest.
      */
