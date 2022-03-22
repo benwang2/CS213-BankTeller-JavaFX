@@ -1,9 +1,16 @@
+
+
 package com.example.cs213banktellergui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+/**
+ * A class that implements functionality for the Bank-Teller GUI
+ * @author Benjamin Wang, Akash Shah
+ */
 
 public class HelloController {
 
@@ -20,7 +27,8 @@ public class HelloController {
 
 
     /**
-     * A helper function that runs
+     * A helper function that runs when the user clicks the submit button.
+     * Handles all commands from the GUI
      */
     @FXML
     protected void submit(){
@@ -58,6 +66,10 @@ public class HelloController {
         }
     }
 
+    /**
+     * A helper function that prints out the text to the TextArea
+     * @param text A string containing what should be printed
+     */
     private void printToOutput(String text){
         textOut.appendText(text+"\n");
     }
@@ -72,6 +84,11 @@ public class HelloController {
         }
         return selectedCampus;
     }
+
+    /**
+     * Takes in the user inputs from the text fields and radio buttons, and creates an account using them
+     * @return an account object that was made from the text fields and radio buttons
+     */
 
     private Account generateAccount(){
         Account account = null;
@@ -89,6 +106,11 @@ public class HelloController {
 
         return account;
     }
+
+    /**
+     * A function that checks the user inputs in the TextFields
+     * @return A String describing the issues with whatever text the user inputted in the TextFields or if everything the user inputted is Valid
+     */
 
     private String checkValidAccount() {
         if (firstName.getText().trim().isEmpty() || lastName.getText().trim().isEmpty()
@@ -130,6 +152,12 @@ public class HelloController {
             return account.getHolder().toString()+" same account(type) is in the database.";
     }
 
+    /**
+     * A helper function to handle the close command.
+     * @param account An account object to close.
+     * @return A string describing whether the account was already closed or not, or if the account does not already exist in the account
+     */
+
     private String checkCloseAccount(Account account){
         boolean accountExists = database.doesAccountExist(account);
         if (accountExists) {
@@ -139,6 +167,12 @@ public class HelloController {
         } else
             return "Can not close a non-existent account.";
     }
+
+    /**
+     * A helper function to handle the deposit command.
+     * @param account An account object containing information for depositing.
+     * @return A string describing whether the account was already successfully deposited into, or if the account does not already exist in the account
+     */
 
     private String checkDepositCommand(Account account){
         boolean accountExists = database.doesAccountExist(account);
@@ -153,36 +187,62 @@ public class HelloController {
         }
     }
 
-    private String checkWithdrawCommand(Account account){
+
+    /**
+     * A helper function to handle the withdraw command.
+     * @param account An account object containing information for withdrawal.
+     * @return A string describing whether the balance was updated successfully, or if the account does not already exist in the database
+     */
+
+    private String checkWithdrawCommand(Account account) {
         boolean accountExists = database.doesAccountExist(account);
-        if(!accountExists)
-            return (account.getHolder().toString() + " " +account.getType() + " is not in the database.");
-        else
-        if (account.getBalance() <= 0)
+        if (!accountExists)
+            return (account.getHolder().toString() + " " + account.getType() + " is not in the database.");
+        else if (account.getBalance() <= 0)
             return "Withdraw - amount cannot be 0 or negative.";
         else
             return database.withdraw(account) ? "Withdraw - balance updated." : "Withdraw - insufficient fund.";
     }
 
+    /**
+     * A helper function that sets one pane to be visible, and the other to be invisible
+     * @param show The VBox pane to be set to visible to the user
+     * @param hide The VBox pane to be set to invisible to the user
+     */
     private void mutexVisibility(VBox show, VBox hide){
         show.setVisible(true);
         hide.setVisible(false);
     }
 
+    /**
+     * A helper function that makes the account pane visible to the user when it is clicked, and the print pane to invisible
+     */
     @FXML
     protected void displayAccountPane(){
         mutexVisibility(accountPane, printPane);
     }
+
+    /**
+     * A helper function that makes the print pane visible to the user when it is clicked, and the account pane to invisible
+     */
 
     @FXML
     protected void displayPrintPane(){
         mutexVisibility(printPane, accountPane);
     }
 
+    /**
+     * A helper function that disables the amount textfield(user can not type in it) when the close command is selected by the user
+     */
     @FXML
     protected void onAccountActionChanged(){
         amount.setDisable(closeRadio.isSelected());
     }
+
+    /**
+     * A helper function that disables the loyalty radio button(user can not check the button)  whenever any other account command besides Savings is selected
+     * Also disables the campus pane(user can not toggle any of radio buttons inside the pane) whenever any other account command besides College Checking is selected
+     */
 
     @FXML
     protected void onAccountTypeChanged(){

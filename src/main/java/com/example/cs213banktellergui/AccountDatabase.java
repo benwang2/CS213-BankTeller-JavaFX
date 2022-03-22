@@ -193,7 +193,7 @@ public class AccountDatabase {
             return "Account database is empty.";
         }
 
-        result += ("*list of accounts in the database*\n");
+        result += ("\n*list of accounts in the database*\n");
         for (int i = 0; i < this.numAccts; i++)
             result += this.accounts[i].toString() + "\n";
         result += ("*end of list*\n");
