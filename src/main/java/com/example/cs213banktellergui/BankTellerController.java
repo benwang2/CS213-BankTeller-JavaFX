@@ -12,18 +12,50 @@ import javafx.scene.layout.VBox;
  * @author Benjamin Wang, Akash Shah
  */
 
-public class HelloController {
+public class BankTellerController {
 
     AccountDatabase  database = new AccountDatabase();
 
+    /**
+     * Fields containing data required to manipulate an account.
+     */
     @FXML private TextField firstName, lastName, dateOfBirth, amount;
+
+    /**
+     * Toggle groups that contain information for manipulating an account.
+     */
     @FXML private ToggleGroup accountType, accountAction, campus, printGroup;
-    @FXML private RadioButton closeRadio;
+
+    /**
+     * Radio buttons that determine the action to perform on an account.
+     */
+    @FXML private RadioButton closeRadio, openRadio;
+
+    /**
+     * Radio buttons that contain a possible campus for a College Checking account.
+     */
     @FXML private RadioButton savingsRadio, collegeCheckingRadio;
+
+    /**
+     * Contains a toggle group that holds information for manipulating an account.
+     */
     @FXML private HBox campusPane, loyaltyPane;
+
+    /**
+     * The two primary panes for the application.
+     */
     @FXML private VBox printPane, accountPane;
+
+    /**
+     * The output area for the application.
+     */
     @FXML private TextArea textOut;
+
+    /**
+     * A checkbox that determines if an account is loyal or not
+     */
     @FXML private CheckBox loyalCheckbox;
+
 
 
     /**
@@ -74,6 +106,11 @@ public class HelloController {
         textOut.appendText(text+"\n");
     }
 
+    /**
+     * Gets the selected campus from the campus ToggleGroup and converts it to an integer
+     * @return an integer that corresponds to a campus
+     */
+
     private int getSelectedCampus(){
         int selectedCampus = -1;
         RadioButton selectedCampusButton = (RadioButton) campus.getSelectedToggle();
@@ -87,7 +124,7 @@ public class HelloController {
 
     /**
      * Takes in the user inputs from the text fields and radio buttons, and creates an account using them
-     * @return an account object that was made from the text fields and radio buttons
+     * @return An Account object that was made from the text fields and radio buttons
      */
 
     private Account generateAccount(){
@@ -109,15 +146,18 @@ public class HelloController {
 
     /**
      * A function that checks the user inputs in the TextFields
-     * @return A String describing the issues with whatever text the user inputted in the TextFields or if everything the user inputted is Valid
-     */
+     * @return A String describing the validity of the account
+     * */
 
     private String checkValidAccount() {
-        if (firstName.getText().trim().isEmpty() || lastName.getText().trim().isEmpty()
+        if (firstName.getText().trim().isEmpty()
+                || lastName.getText().trim().isEmpty()
                 || dateOfBirth.getText().trim().isEmpty()
                 || amount.getText().trim().isEmpty()) {
             return "Missing data";
         } else {
+            if(!dateOfBirth.getText().matches("\\d+/\\d+/\\d+")) return "Date of birth invalid.";
+
             Profile profile = new Profile(firstName.getText(), lastName.getText(), dateOfBirth.getText());
             if (!profile.isValid()) return "Date of birth invalid.";
             try {
@@ -206,8 +246,8 @@ public class HelloController {
 
     /**
      * A helper function that sets one pane to be visible, and the other to be invisible
-     * @param show The VBox pane to be set to visible to the user
-     * @param hide The VBox pane to be set to invisible to the user
+     * @param show The VBox pane to be set to visible
+     * @param hide The VBox pane to be set to invisible
      */
     private void mutexVisibility(VBox show, VBox hide){
         show.setVisible(true);
@@ -232,21 +272,24 @@ public class HelloController {
     }
 
     /**
-     * A helper function that disables the amount textfield(user can not type in it) when the close command is selected by the user
+     * A helper function that disables the amount textfield when the close command is selected by the user
+     * Disables the campus pane whenever the college checking  command and open command is not selected
      */
     @FXML
     protected void onAccountActionChanged(){
         amount.setDisable(closeRadio.isSelected());
+        campusPane.setDisable(!(collegeCheckingRadio.isSelected() && openRadio.isSelected()));
     }
 
     /**
-     * A helper function that disables the loyalty radio button(user can not check the button)  whenever any other account command besides Savings is selected
-     * Also disables the campus pane(user can not toggle any of radio buttons inside the pane) whenever any other account command besides College Checking is selected
+     * A function that is called when the account type is changed
+     * A helper function that disables the loyalty radio button whenever any account command besides Savings is selected
+     * Also disables the campus pane whenever the college checking  command and open command is not selected
      */
 
     @FXML
     protected void onAccountTypeChanged(){
         loyaltyPane.setDisable(!savingsRadio.isSelected());
-        campusPane.setDisable(!collegeCheckingRadio.isSelected());
+        campusPane.setDisable(!(collegeCheckingRadio.isSelected() && openRadio.isSelected()));
     }
 }

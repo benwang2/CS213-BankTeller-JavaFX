@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane id="bankTeller" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.cs213banktellergui.HelloController">
+            fx:controller="com.example.cs213banktellergui.BankTellerController">
    <left>
       <VBox id="paneControl" prefHeight="0.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -90,13 +90,13 @@
                   </HBox>
                   <HBox id="accountActionPane" prefWidth="200.0" spacing="48.0" style="-fx-background-color: #eee;">
                      <children>
-                        <RadioButton id="openRadio" mnemonicParsing="false" text="Open" selected="true" onAction="#onAccountActionChanged">
+                        <RadioButton fx:id="closeRadio" mnemonicParsing="false" text="Close" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
+                        <RadioButton id="depositRadio" mnemonicParsing="false" text="Deposit" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
+                        <RadioButton fx:id="openRadio" mnemonicParsing="false" text="Open" selected="true" onAction="#onAccountActionChanged">
                            <toggleGroup>
                               <ToggleGroup fx:id="accountAction" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="closeRadio" mnemonicParsing="false" text="Close" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
-                        <RadioButton id="depositRadio" mnemonicParsing="false" text="Deposit" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
                         <RadioButton id="withdrawRadio" mnemonicParsing="false" text="Withdraw" toggleGroup="$accountAction" onAction="#onAccountActionChanged"/>
                      </children>
                      <padding>
